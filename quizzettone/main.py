@@ -1,5 +1,5 @@
 '''
-1.
+--------------1.
 mostra_menu() (senza return)
 Non prende parametri
 Stampa la domanda e le 4 opzioni
@@ -23,7 +23,7 @@ D. Rocco Pappaleo
 
 
 """
-2.
+--------------2.
 raccogli_risposta() (con return)
 Non prende parametri
 Chiede l'input all'utente
@@ -40,7 +40,7 @@ def raccogli_risposta() -> str :
    
 
 """
-3.
+--------------3.
 valida_scelta(scelta) (con return)
 prende come parametro il numero scelto
 Verifica se è tra A e D usando if
@@ -60,13 +60,22 @@ def valida_scelta(scelta: str) -> bool:
     
 
 """
+--------------4.
 genera_feedback(scelta) (con return)
-Prende come parametro il numero scelto (1-4)
+Prende come parametro la lettera scelta (A-D)
 Usa if/elif/else per determinare il messaggio
 Restituisce la stringa con il feedback personalizzato
 
 """
-
+def genera_feedback(scelta:str) -> str :
+    """
+    Restituisce il messaggio che indica all'utente se ha indovinato la risposta oppure no.
+    Questa funzione viene eseguita solo se la funzione di validazione resituisce true
+    """
+    if scelta.upper() == "A":
+        return "Hai indovinato"
+    else:
+        return "Non hai indovinato. Ritenta"
 
 
 
@@ -75,5 +84,10 @@ mostra_domanda()
 
 risposta_da_validare : str =  raccogli_risposta()
 risposta_validata : bool = valida_scelta(risposta_da_validare)
-
-print(risposta_validata)
+feedback: str = ""
+if risposta_validata == True:
+    feedback = genera_feedback(risposta_da_validare)
+else:
+    feedback("Inserisi solo la risposta tra le opzioni")
+    
+print(feedback)
