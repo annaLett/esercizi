@@ -36,7 +36,7 @@ def raccogli_risposta() -> str :
     Questa funzione si occupa solamente di prendere l'input dell'utente.
     Il controllo di tale valore avverrà attraverso una funzione dedicata
     """
-    return input("Inserisci la tua scelta:")
+    return input("----> Inserisci la tua scelta:")
    
 
 """
@@ -100,17 +100,39 @@ def mostra_feedback(messaggio:str) -> None:
 
 
 
+def main():
+    is_risposta_corretta: bool = False
+    while True:
+        mostra_domanda()
+        risposta_da_validare: str = raccogli_risposta()
+        risposta_validata: bool = valida_scelta(risposta_da_validare)
+        feedback: str = ""
+
+        if risposta_validata == True:
+            feedback = genera_feedback(risposta_da_validare)
+            if feedback == "Hai indovinato!":
+                is_risposta_corretta = True
+        else: 
+            feedback = "Inserisci solo la risposta tra le opzioni elencate"
+
+        mostra_feedback(feedback)
+        if is_risposta_corretta == True: 
+            break
+
+"""
+
+def main() -> None:
+    mostra_domanda()
+    risposta_da_validare : str =  raccogli_risposta()
+    risposta_validata : bool = valida_scelta(risposta_da_validare)
+    feedback: str = ""
+    if risposta_validata == True:
+        feedback = genera_feedback(risposta_da_validare)
+    else:
+        feedback("Inserisi solo la risposta tra le opzioni")
+    mostra_feedback(feedback)
+"""
 
 
-mostra_domanda()
-#print(raccogli_risposta())
-
-risposta_da_validare : str =  raccogli_risposta()
-risposta_validata : bool = valida_scelta(risposta_da_validare)
-feedback: str = ""
-if risposta_validata == True:
-    feedback = genera_feedback(risposta_da_validare)
-else:
-    feedback("Inserisi solo la risposta tra le opzioni")
-    
-mostra_feedback(feedback)
+#Entry point nel programma
+main()
