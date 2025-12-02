@@ -1,3 +1,6 @@
+import sys
+import psutil
+
 '''
 Obiettivo
 Creare un'applicazione a riga di comando che permette all'utente di visualizzare diverse statistiche di sistema usando le librerie sys e psutil.
@@ -31,7 +34,59 @@ Per ogni statistica, mostrare:
 - Esempio: "Opzione non valida. Scegli un numero tra 1 e 6."
 '''
 
-import sys
-import psutil
 
-scelta_utente = int(print("Seleziona una statistica:\n\n1. Versione Python\n2. Sistema Operativo\n3. RAM Totale\n4. RAM Disponibile\n5. Utilizzo CPU\n6. Numero CPU\n\nInserisci la tua scelta:"))
+
+def stampa_menu() -> str:
+    scelta_utente = input("""
+Seleziona una statistica:
+
+1. Versione Python
+2. Percorso dell'eseguibile di Python
+3. Spazio disco totale
+4. Percentuale RAM usata
+5. Numero di CPU logiche
+6. Piattaforma sistema operativo
+
+Inserisci la tua scelta (oppure X per uscire): 
+"""
+        )
+    return scelta_utente
+    
+def menu_psutil() -> None:
+    while True:
+        scelta_utente = stampa_menu()
+
+        # Esci dal programma
+        if scelta_utente.upper() == "X":
+            print("Uscita dal programma.")
+            break
+
+        # Controllo input numerico
+        if not scelta_utente.isdigit():
+            print("******************Inserire solo valori numerici (1-6)****************")
+            continue
+
+        scelta_utente = int(scelta_utente)
+
+        if scelta_utente == 1:
+            print("---------------->La versione di Python è:", sys.version)
+
+        elif scelta_utente == 2:
+            print("---------------->Il percorso dell'eseguibile di Python è:", sys.executable)
+
+        elif scelta_utente == 3:
+            print("---------------->Lo spazio disco totale è:", psutil.disk_usage('/').total)
+
+        elif scelta_utente == 4:
+            print("---------------->La percentuale RAM usata è:", psutil.virtual_memory().percent)
+
+        elif scelta_utente == 5:
+            print("---------------->Il numero di CPU logiche è:", psutil.cpu_count())
+
+        elif scelta_utente == 6:
+            print("---------------->La piattaforma del sistema operativo è:", sys.platform)
+
+        else:
+            print("******************Inserisci un numero compreso tra 1 e 6****************")
+            
+menu_psutil()
