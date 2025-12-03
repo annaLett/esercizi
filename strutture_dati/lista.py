@@ -50,3 +50,6 @@ if is_the_value_in_the_list  == True:
     
 print(stringhe)
 print(deleted_values)
+
+
+stringhe2 : list[int|str|list] = [] #indico che questa lista ha tipi misti tra cui liste
